@@ -1,2 +1,10 @@
 Use this as a guide: https://kelvin-hsu.github.io/page/
 
+
+git add .
+git commit -m "message"
+git push
+
+quarto create-project . --type default
+quarto preview statistics_1.qmd
+quarto render statistics_1.qmd --output-dir ../blog_posts/statistics_1
