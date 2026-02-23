@@ -1,0 +1,31 @@
+---
+title: "Statistics 1: Overview of Subject"
+format:
+  html:
+    standalone: true
+    math: mathjax
+    css: post.css
+---
+
+Simply put, statistics is observing data and trying to understand the underlying data generating process. In this sense, it is the inverse of probability theory which studies how a given stochastic model evolves or works.
+
+
+
+
+::: {.box #def-random_sample}
+## Random Sample
+Let $\mathbb{P}_X$ be a probability distribution. Then $\set{X_i}_{i=1}^n$ such that $X_i \sim \mathbb{P}_X$ (identically distributed) and for $i \neq j$, $X_i$ and $X_j$ are independent.
+:::
+
+
+Of course, you can also have multiple random variables. Some common statistics include:
+
+| Statistic | Definition |
+|:--------:|:------------:|
+| Sample Mean | $\displaystyle \overline{X} = \frac{1}{n} \sum_{i=1}^n X_i$ |
+| Sample Variance | $\displaystyle S^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X})^2$ |
+| Sample Correlation | $\displaystyle r = \frac{\sum_{i=1}^n (X_i - \overline{X})(Y_i - \overline{Y})}{\sqrt{\sum_{i=1}^n (X_i - \overline{X})^2} \sqrt{\sum_{i=1}^n (Y_i - \overline{Y})^2}}$ |
+| Order Statistics | $X_{(1)} \leq X_{(2)} \leq \dots \leq X_{(n)}$ |
+: Common Sample Statistics
+
+See @def-random_sample for more details.
