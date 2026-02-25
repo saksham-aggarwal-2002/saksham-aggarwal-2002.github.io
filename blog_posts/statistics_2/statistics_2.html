@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistics 1: Statistical Inference</title>
+<title>Statistics 2: Statistical Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,18 +23,18 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="statistics_1_files/libs/clipboard/clipboard.min.js"></script>
-<script src="statistics_1_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="statistics_1_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="statistics_1_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="statistics_1_files/libs/quarto-html/popper.min.js"></script>
-<script src="statistics_1_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="statistics_1_files/libs/quarto-html/anchor.min.js"></script>
-<link href="statistics_1_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="statistics_1_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="statistics_1_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="statistics_1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="statistics_1_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="statistics_2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="statistics_2_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="statistics_2_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="statistics_2_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="statistics_2_files/libs/quarto-html/popper.min.js"></script>
+<script src="statistics_2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="statistics_2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="statistics_2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="statistics_2_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="statistics_2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="statistics_2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="statistics_2_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -77,7 +77,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Statistics 1: Statistical Inference</h1>
+<h1 class="title">Statistics 2: Statistical Modelling</h1>
 </div>
 
 
@@ -94,134 +94,13 @@ window.Quarto = {
 </header>
 
 
-<p>Simply put, statistical <em>inference</em> is observing data and trying to <em>infer</em> the underlying data generating process (DGP). In this sense, it is the inverse of probability theory which studies how a given stochastic model evolves or works.</p>
-<p>Most often, we assume to have observed a finite random sample:</p>
-<div id="def-random_sample" class="box theorem definition">
-<p><span class="theorem-title"><strong>Definition 1 (Random Sample)</strong></span> Let <span class="math inline">\(\mathbb{P}_X\)</span> be a probability distribution. Then <span class="math inline">\(\set{X_i}_{i=1}^n\)</span> such that <span class="math inline">\(X_i \sim \mathbb{P}_X\)</span> (identically distributed) and for <span class="math inline">\(i \neq j\)</span>, <span class="math inline">\(X_i\)</span> and <span class="math inline">\(X_j\)</span> are independent.</p>
-</div>
-<p>And we ask what can we learn about the underlying DGP which in this case is learning some information about <span class="math inline">\(\mathbb{P}_X\)</span>. The most straight forward method to learn about <span class="math inline">\(\mathbb{P}_X\)</span> is to just see the distribution of the random sample:</p>
-<ul>
-<li>Visualise distribution of observations</li>
-<li>Does this only work with a random sample?</li>
-</ul>
-<p>Beyond visualisations, we can construct a measurable function of our random sample called a statistic to learn more precise information.</p>
-<div id="def-statistic" class="box theorem definition">
-<p><span class="theorem-title"><strong>Definition 2 (Statistic)</strong></span> Let <span class="math inline">\(\set{X_i}_{i=1}^n\)</span> be a random sample from <span class="math inline">\(\mathbb{P}_X\)</span>. Then any measurable function <span class="math inline">\(T(X_1, ..., X_n)\)</span> of the random sample is a statistic.</p>
-</div>
-<p>Some common statistics include:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 41%">
-<col style="width: 58%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: center;">Statistic</th>
-<th style="text-align: center;">Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">Sample Mean</td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \overline{X} = \frac{1}{n} \sum_{i=1}^n X_i\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Sample Variance</td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle S^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X})^2\)</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Order Statistics</td>
-<td style="text-align: center;"><span class="math inline">\(X_{(1)} \leq X_{(2)} \leq \dots \leq X_{(n)}\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>Note that as a function of random variables, a statistic is just another random variable.</p>
-<p>But how does the statistics above help us understand the DGP? Basically, they reveal information about <span class="math inline">\(\mathbb{P}_X\)</span>:</p>
-<p>First question is what we want to learn. Introduce parametric, non-parametric, functional relationship, etc.</p>
-<section id="parametric-statistics" class="level1">
-<h1>Parametric Statistics</h1>
-<p>In parametric statistics, we assume that the DGP is dependent upon some parameters, so the underlying probability law is <span class="math inline">\(\mathbb{P}_\theta\)</span>. Learning the DGP, then reduces to learning the parameter <span class="math inline">\(\theta\)</span> from an observed random sample.</p>
-<div id="def-estimator" class="box theorem definition">
-<p><span class="theorem-title"><strong>Definition 3 (Estimator)</strong></span> If a statistic <span class="math inline">\(\hat{\theta}_n\)</span> is used to estimate a population parameter <span class="math inline">\(\theta\)</span>, we can call it an estimator for <span class="math inline">\(\theta\)</span>.</p>
-</div>
-<section id="quantifying-uncertainty" class="level2">
-<h2 class="anchored" data-anchor-id="quantifying-uncertainty">Quantifying Uncertainty</h2>
-<ul>
-<li>Confidence intervals</li>
-<li>Statistical Tests</li>
-</ul>
-<p>Both use the fluctuations in the sampling distribution to quantify our level of uncertainty about our estimate.</p>
-<p>Two kinds of statements that are technically the same. And to do with the uncertainty from the random sample. We quantify that using the fluctuation of the estimator around the true parameter.</p>
-<p>Frame it in the statistically significant lens instead of confidence sets. - Statistical significance means the observed estimate represents a fluctuation too large to be plausibly explained by sampling variability</p>
-<ul>
-<li>Under the observed estimate,</li>
-</ul>
-<p>Now suppose we’ve chosen an estimator <span class="math inline">\(\hat{\theta}\)</span> and observed a random sample from which we can calculate <span class="math inline">\(\hat{\theta} = \theta_0\)</span>. How close is our actual estimate <span class="math inline">\(\theta_0\)</span> to real parameter <span class="math inline">\(\theta\)</span>? This is not something we can quantify since <span class="math inline">\(\theta\)</span> is unknown.</p>
-<p>But suppose we know the sampling distribution of <span class="math inline">\(\hat{\theta}\)</span> which, for an unbiased estimator, hugs the true parameter (the mean value is the true parameter). Then the variance or fluctuation of the sampling distribution gives us a way to quantify how confident we can be that the estimated parameter is close to the true parameter.</p>
-<div id="exm-estimator" class="box theorem example">
-<p><span class="theorem-title"><strong>Example 1 (Variance of Sampling Distribution relates to Confidence in Estimator)</strong></span> Take the sample mean of a normal distribution with known variance as an estimator. I know the sample mean distribution is N(mu, sigma^2/n) where N(mu, sigma^2) is the population distribution. So variance of sampling distribution is sigma^2/n.&nbsp;mu is still unknown. I have observed a random sample and my obtained mean is 3.5. - If <span class="math inline">\(\sigma^2/n\)</span> is tiny, the estimator is concentrated around sampling distribution mean (true parameter) - hence obtained estimate is likely close to true parameter - high certainty. - If <span class="math inline">\(\sigma^2/n\)</span> is huge, the estimator is widely spread around sampling distribution mean (true parameter) - hence obtained estimate may be far away from true parameter - low certainty.</p>
-</div>
-<p>Using the fluctuations of sampling distribution to quantify uncertainty. Two approaches which are identical but express things differently: - Confidence interval fixes a level of confidence, and returns an interval of possible estimates - Hypothesis testing fixes a level of confidence, and …</p>
-<p>Essentially it’s a way of being able to say if something is statistically significant. Using the fluctuations in sampling distribution to say whether an estimate is truly close to true parameter, or the fluctuations are too high to say that confidently.</p>
-</section>
-<section id="choosing-an-estimator" class="level2">
-<h2 class="anchored" data-anchor-id="choosing-an-estimator">Choosing an Estimator</h2>
-<p>Normative statistical theory</p>
-<p>There is a lot of theory around constructing and choosing estimators which are best in some sense. Naturally, we want to construct estimators where the error <span class="math inline">\(| \hat{\theta}_n - \theta |\)</span> is minimised in some way.</p>
-<ul>
-<li>Statistical decision theory use a loss function to define estimators
-<ul>
-<li>Minimax theory</li>
-<li>Baye’s Shit</li>
-</ul></li>
-<li>Method of maximum likelihood to construct MLE estimators</li>
-<li>Uniformly minimum variance unbiased estimator (UMVUE), Best linear unbiased estimator (BLUE)
-<ul>
-<li>Cramer Rao Lower Bound, Rao Blackwell, Fisher information, information inequalities</li>
-<li>James stein paradox (overall you may find estimator with lower MSE which is biased)</li>
-</ul></li>
-<li>UMP (uniformly most powerful) tests, UMPU (uniformly most powerful unbiased), UMPI (uniformly most powerful invariant), Likelihood ratio tests</li>
-<li>UMA (uniformly most accurate), UMAU (uniformly most accurate unbiased)</li>
-</ul>
-<p>Other methods: - Method of moments - U-statistics, V-statistics etc.</p>
-</section>
-</section>
-<section id="non-parametric-statistics" class="level1">
-<h1>Non-Parametric Statistics</h1>
-</section>
-<section id="semi-parametric-statistics" class="level1">
-<h1>Semi-parametric Statistics</h1>
-<p>This theory is about about robustness and model mis-specification. It sits somewhere between parametric and non-parametric statistics.</p>
-</section>
-<section id="perspectives-to-incorporate-throughout" class="level1">
-<h1>Perspectives to incorporate throughout</h1>
-<ul>
-<li>Asymptotic versions under <span class="math inline">\(p\)</span> (dimension of parameter space) fixed and n <span class="math inline">\(\to\)</span> infinity</li>
-<li>Computational methods: bootstrap, MCMC, EM algorithm etc.</li>
-</ul>
-</section>
-<section id="high-dimensional-parametric-statistics" class="level1">
-<h1>High-dimensional Parametric Statistics</h1>
-<p>Curse of dimensionality</p>
-<ul>
-<li><p>Considering the case <span class="math inline">\(p\)</span> (dimension of parameter space or ambient dimension of data which is the real driver) is increase with <span class="math inline">\(p/n \to c\)</span> where <span class="math inline">\(c\)</span> is some constant.</p></li>
-<li><p>Parametric (finite p) –&gt; High-dimensional (growing p) –&gt; non-parametric (infinite p which is some sort of function space)</p></li>
-</ul>
-</section>
-<section id="junk-for-now" class="level1">
-<h1>JUNK FOR NOW:</h1>
-<p>See <a href="#def-random_sample" class="quarto-xref">Definition&nbsp;1</a> for more details.</p>
-<p>Bivariate Analysis: | Sample Correlation | <span class="math inline">\(\displaystyle r = \frac{\sum_{i=1}^n (X_i - \overline{X})(Y_i - \overline{Y})}{\sqrt{\sum_{i=1}^n (X_i - \overline{X})^2} \sqrt{\sum_{i=1}^n (Y_i - \overline{Y})^2}}\)</span> |</p>
-</section>
-<section id="spread-around-a-point" class="level1">
-<h1>Spread around a point</h1>
-<p>For any given distribution, we can calculate the MSE (quantifying spread) around a point. The mean minimises this MSE by eliminating the bias. So the mean is where a distribution is the most clumped around. - Note different distance metrics have their own centres and measures of clumping</p>
-<p>Ok if we can understand the level of spread of the sampling distribution around the true parameter, then we know what the typical fluctuation (or MSE) looks like around true parameter. Then we can compare the typical fluctuation with …</p>
-<ul>
-<li>On average interpretation of unbiased or in expecataiton or MSE as opposed to pointwise theory</li>
-</ul>
+<p>Once we have the theory to infer the data generating process, we can assume some probability model based on some missing parameter values/pieces and use our observations to infer those missing bits.</p>
+<p>Regression modelling</p>
+<p>GLM</p>
+<p>Rate of convergence for parametric models</p>
+<p>PCA, ICA, LDA, factor Analysis</p>
+<p>Timeseries. ARIMA etc.</p>
 
-</section>
 
 </main>
 <!-- /main column -->

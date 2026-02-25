@@ -6,5 +6,5 @@ git commit -m "message"
 git push
 
 quarto create-project . --type default
-quarto preview statistics_1.qmd
-quarto render statistics_1.qmd --output-dir ../blog_posts/statistics_1
+quarto preview quarto_posts/statistics_1.qmd
+quarto render statistics_2.qmd --output-dir blog_posts/statistics_2
