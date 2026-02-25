@@ -1,0 +1,22 @@
+---
+title: "Statistics 2: Statistical Modelling"
+format:
+  html:
+    standalone: true
+    math: mathjax
+    css: post.css
+---
+
+Once we have the theory to infer the data generating process, we can assume some probability model based on some missing parameter values/pieces and use our observations to infer those missing bits.
+
+Regression modelling
+
+GLM
+
+Rate of convergence for parametric models
+
+PCA, ICA, LDA, factor Analysis
+
+Timeseries. ARIMA etc.
+
+

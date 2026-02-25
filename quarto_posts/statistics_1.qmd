@@ -1,5 +1,5 @@
 ---
-title: "Statistics 1: Overview of Subject"
+title: "Statistics 1: Statistical Inference"
 format:
   html:
     standalone: true
@@ -7,25 +7,134 @@ format:
     css: post.css
 ---
 
-Simply put, statistics is observing data and trying to understand the underlying data generating process. In this sense, it is the inverse of probability theory which studies how a given stochastic model evolves or works.
+Simply put, statistical *inference* is observing data and trying to *infer* the underlying data generating process (DGP). In this sense, it is the inverse of probability theory which studies how a given stochastic model evolves or works.
 
-
-
+Most often, we assume to have observed a finite random sample:
 
 ::: {.box #def-random_sample}
 ## Random Sample
 Let $\mathbb{P}_X$ be a probability distribution. Then $\set{X_i}_{i=1}^n$ such that $X_i \sim \mathbb{P}_X$ (identically distributed) and for $i \neq j$, $X_i$ and $X_j$ are independent.
 :::
 
+And we ask what can we learn about the underlying DGP which in this case is learning some information about $\mathbb{P}_X$. The most straight forward method to learn about $\mathbb{P}_X$ is to just see the distribution of the random sample:
 
-Of course, you can also have multiple random variables. Some common statistics include:
+- Visualise distribution of observations
+- Does this only work with a random sample?
+
+Beyond visualisations, we can construct a measurable function of our random sample called a statistic to learn more precise information.
+
+:::{.box #def-statistic}
+## Statistic
+Let $\set{X_i}_{i=1}^n$ be a random sample from $\mathbb{P}_X$. Then any measurable function $T(X_1, ..., X_n)$ of the random sample is a statistic. 
+:::
+
+Some common statistics include:
 
 | Statistic | Definition |
 |:--------:|:------------:|
 | Sample Mean | $\displaystyle \overline{X} = \frac{1}{n} \sum_{i=1}^n X_i$ |
 | Sample Variance | $\displaystyle S^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X})^2$ |
-| Sample Correlation | $\displaystyle r = \frac{\sum_{i=1}^n (X_i - \overline{X})(Y_i - \overline{Y})}{\sqrt{\sum_{i=1}^n (X_i - \overline{X})^2} \sqrt{\sum_{i=1}^n (Y_i - \overline{Y})^2}}$ |
 | Order Statistics | $X_{(1)} \leq X_{(2)} \leq \dots \leq X_{(n)}$ |
-: Common Sample Statistics
 
+Note that as a function of random variables, a statistic is just another random variable.
+
+But how does the statistics above help us understand the DGP? Basically, they reveal information about $\mathbb{P}_X$:
+
+First question is what we want to learn. Introduce parametric, non-parametric, functional relationship, etc.
+
+# Parametric Statistics
+
+In parametric statistics, we assume that the DGP is dependent upon some parameters, so the underlying probability law is $\mathbb{P}_\theta$. Learning the DGP, then reduces to learning the parameter $\theta$ from an observed random sample. 
+
+:::{.box #def-estimator}
+## Estimator
+If a statistic $\hat{\theta}_n$ is used to estimate a population parameter $\theta$, we can call it an estimator for $\theta$. 
+:::
+
+## Quantifying Uncertainty
+
+- Confidence intervals
+- Statistical Tests
+
+Both use the fluctuations in the sampling distribution to quantify our level of uncertainty about our estimate.
+
+Two kinds of statements that are technically the same. And to do with the uncertainty from the random sample. We quantify that using the fluctuation of the estimator around the true parameter.
+
+
+Frame it in the statistically significant lens instead of confidence sets.
+- Statistical significance means the observed estimate represents a fluctuation too large to be plausibly explained by sampling variability
+
+- Under the observed estimate, 
+
+Now suppose we've chosen an estimator $\hat{\theta}$ and observed a random sample from which we can calculate $\hat{\theta} = \theta_0$. How close is our actual estimate $\theta_0$ to real parameter $\theta$? This is not something we can quantify since $\theta$ is unknown.
+
+But suppose we know the sampling distribution of $\hat{\theta}$ which, for an unbiased estimator, hugs the true parameter (the mean value is the true parameter). Then the variance or fluctuation of the sampling distribution gives us a way to quantify how confident we can be that the estimated parameter is close to the true parameter.
+
+::: {.box #exm-estimator}
+## Variance of Sampling Distribution relates to Confidence in Estimator
+
+Take the sample mean of a normal distribution with known variance as an estimator. I know the sample mean distribution is N(mu, sigma^2/n) where N(mu, sigma^2) is the population distribution. So variance of sampling distribution is sigma^2/n. mu is still unknown. I have observed a random sample and my obtained mean is 3.5.
+- If $\sigma^2/n$ is tiny, the estimator is concentrated around sampling distribution mean (true parameter) - hence obtained estimate is likely close to true parameter - high certainty.
+- If $\sigma^2/n$ is huge, the estimator is widely spread around sampling distribution mean (true parameter) - hence obtained estimate may be far away from true parameter - low certainty.
+
+:::
+
+Using the fluctuations of sampling distribution to quantify uncertainty. Two approaches which are identical but express things differently:
+- Confidence interval fixes a level of confidence, and returns an interval of possible estimates
+- Hypothesis testing fixes a level of confidence, and ...
+
+Essentially it's a way of being able to say if something is statistically significant. Using the fluctuations in sampling distribution to say whether an estimate is truly close to true parameter, or the fluctuations are too high to say that confidently.
+
+
+## Choosing an Estimator
+
+Normative statistical theory
+
+There is a lot of theory around constructing and choosing estimators which are best in some sense. Naturally, we want to construct estimators where the error $| \hat{\theta}_n - \theta |$ is minimised in some way. 
+
+- Statistical decision theory use a loss function to define estimators
+  - Minimax theory
+  - Baye's Shit
+- Method of maximum likelihood to construct MLE estimators
+- Uniformly minimum variance unbiased estimator (UMVUE), Best linear unbiased estimator (BLUE)
+  - Cramer Rao Lower Bound, Rao Blackwell, Fisher information, information inequalities
+  - James stein paradox (overall you may find estimator with lower MSE which is biased)
+- UMP (uniformly most powerful) tests, UMPU (uniformly most powerful unbiased), UMPI (uniformly most powerful invariant), Likelihood ratio tests
+- UMA (uniformly most accurate), UMAU (uniformly most accurate unbiased)
+
+Other methods:
+- Method of moments
+- U-statistics, V-statistics etc.
+
+# Non-Parametric Statistics
+
+# Semi-parametric Statistics
+This theory is about about robustness and model mis-specification. It sits somewhere between parametric and non-parametric statistics.
+
+# Perspectives to incorporate throughout
+- Asymptotic versions under $p$ (dimension of parameter space) fixed and n $\to$ infinity
+- Computational methods: bootstrap, MCMC, EM algorithm etc.
+
+# High-dimensional Parametric Statistics
+Curse of dimensionality
+
+- Considering the case $p$ (dimension of parameter space or ambient dimension of data which is the real driver) is increase with $p/n \to c$ where $c$ is some constant.
+
+- Parametric (finite p) --> High-dimensional (growing p) --> non-parametric (infinite p which is some sort of function space)
+
+
+# JUNK FOR NOW:
 See @def-random_sample for more details.
+
+Bivariate Analysis:
+| Sample Correlation | $\displaystyle r = \frac{\sum_{i=1}^n (X_i - \overline{X})(Y_i - \overline{Y})}{\sqrt{\sum_{i=1}^n (X_i - \overline{X})^2} \sqrt{\sum_{i=1}^n (Y_i - \overline{Y})^2}}$ |
+
+# Spread around a point
+
+For any given distribution, we can calculate the MSE (quantifying spread) around a point. The mean minimises this MSE by eliminating the bias. So the mean is where a distribution is the most clumped around.
+- Note different distance metrics have their own centres and measures of clumping
+
+Ok if we can understand the level of spread of the sampling distribution around the true parameter, then we know what the typical fluctuation (or MSE) looks like around true parameter. 
+Then we can compare the typical fluctuation with ... 
+
+- On average interpretation of unbiased or in expecataiton or MSE as opposed to pointwise theory
